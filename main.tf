@@ -1,29 +1,13 @@
-provider "aws" {
-    region = "us-east-1"
-    access_key = "AKIAWWACO5SDWT3JLVOR"
-    secret_key = "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"
 
-}
-module "VPC" {
-  source = ".\\vpc"
+terraform {
+  required_version = ">=0.12"
 }
 
-module "SUBNET" {
-  source = ".\\subnet"
+resource "aws_vpc" "mumvpc" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "mumvpc"
+  }
 }
-
-module "IGANDROUTE" {
-  source = ".\\igandroute"
-}
-
-module "SECURITYGROUP" {
-  source = ".\\securitygroup"
-}
-
-module "EC2INSTANCE" {
-  source = ".\\ec2instance"
-}
-
-
-
-
